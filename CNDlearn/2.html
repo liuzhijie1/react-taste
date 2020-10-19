@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>shiyanlou</title>
+
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+
+  <body>
+    <div id="root"></div>
+
+    <script type="text/babel">
+      function fn(user) {
+        return user.name + ' is ' + user.gender;
+      }
+
+      const user = {
+        name: 'firefly',
+        gender: 'male'
+      };
+
+      const element1 = <h1>{fn(user)}</h1>;
+
+      const element2 = (
+        <h2>
+          {user.name} is {user.gender}
+        </h2>
+      )
+
+      const element3 = (
+        <h3>{3 + 4}</h3>
+      )
+
+      const ele = (
+        <div>
+          {element1}  
+          {element2}
+          {element3}
+        </div>
+      )
+
+      ReactDOM.render(ele, document.getElementById('root'));
+
+    </script>
+  </body>
+</html>
