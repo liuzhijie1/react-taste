@@ -22,6 +22,9 @@
 
       const element1 = <img src="{user.url}" alt="" />
 
+
+      const styleElement = <div style={{ color: '#AAAAAA', width: '100px', fontSize: '15px'}}></div>;
+
       // 在这里，我们关注的是事件的命名 onClick，对应原生 HTML 中的 onclick 。在这里我们插一句题外话，
       // React 模拟事件系统。React 不会把事件绑定到每一个具体元素上，
       // 而是采用事件代理模式：在根节点上为每种事件添加唯一的 Listener，然后通过触发事件的 target 找到真正的触发元素。
