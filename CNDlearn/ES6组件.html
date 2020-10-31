@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>shiyanlou</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      // import React from 'react';
+      // import ProtoTypes from 'prop-types'
+
+      // 最简单的ES6 声明组件的方式
+      // class Welcome extends React.Component {
+      //   render() {
+      //     return (
+      //       <div>
+      //         <h1>Hello, {this.props.name} </h1>
+      //         <h2>Have a nice day!</h2>
+      //       </div>
+      //     )
+      //   }
+      // }
+
+      class Welcome extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = { user: '' };
+          this.handleClick = this.handleClick.bind(this);
+        }
+
+        // static defaultProps = {
+        //   name: 'shiyanlou'
+        // }
+
+        // static propTypes = {
+        //   name: React.ProtoTypes.string
+        // }
+
+        handleClick() {
+          console.log(this);
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Hello,{this.props.name}</h1>
+              <h2>Have a nice time!</h2>
+              <button onClick={this.handleClick}>click me!</button>
+            </div>
+          )
+        }
+
+      }
+
+      // protoTypes 一般用来做类型检查
+      Welcome.propTypes = {
+        name: PropTypes.string
+      }
+
+      Welcome.defaultProps = {
+        name: 'shiyanlou'
+      }
+
+      // export default Welcome;
+      ReactDOM.render(
+        <Welcome name="shiyanlou11" />,
+        document.getElementById('root')
+      )
+      
+    </script>
+  </body>
+</html>

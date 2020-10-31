@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      class InputForm extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            value: 'pear',
+          };
+          this.handleChange = this.handleChange.bind(this);
+          this.handleSubmit = this.handleSubmit.bind(this);
+        }
+        handleChange(e) {
+          this.setState({
+            value: e.target.value,
+          });
+        }
+        handleSubmit(e) {
+          alert('submit: ' + this.state.value);
+          e.preventDefault(); //阻止表单默认提交
+        }
+        render() {
+          return (
+            <form onSubmit={this.handleSubmit}>
+              <label>
+                Pick your favorite fruit:
+                <select value={this.state.value} onChange={this.handleChange}>
+                  <option value="apple">Apple</option>
+                  <option value="banana">Banana</option>
+                  <option value="pear">Pear</option>
+                </select>
+              </label>
+              <input type="submit" value="Submit" />
+            </form>
+          );
+        }
+      }
+      ReactDOM.render(<InputForm />, document.getElementById('root'));
+    </script>
+  </body>
+</html>

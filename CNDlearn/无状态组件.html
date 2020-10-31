@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>shiyanlou</title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    
+      function Welcome(props) {
+        return (
+          <div>
+            <h1>Hello,{props.name}</h1>
+            <h2>Have a nice time!</h2>
+            <MyWelcome name='liujie' age={13}></MyWelcome>
+          </div>
+        );
+      }
+
+      function MyWelcome(props) {
+        return (
+          <div>
+            <h1 className="my">Hello,{props.name}</h1>
+            <h1 className="you">Hello, {typeof props.age}</h1>
+          </div>
+        )
+      }
+
+      // function Welcome(props) {
+      //   return (
+      //     <div>
+      //       <h1>Hello, {props.name}</h1>
+      //       <h1>have a  nice day</h1>
+      //     </div>
+      //   )
+      // }
+
+      // const Welcome = (props) => {
+      //   return (
+      //     <div>
+      //       <h1>Hello, {props.name}</h1>
+      //       <h2>Have a nice time !</h2>
+      //     </div>
+      //   )
+      // }
+
+      // 这里是嵌套不了的，只能通过，
+      ReactDOM.render(
+        (<Welcome name="React">
+        </Welcome>),
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>
