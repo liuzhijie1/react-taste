@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class Child extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+
+        render() {
+          return <h1>Welcome {this.props.name}</h1>
+        }
+      }
+
+      Child.propTypes = {
+        name: PropTypes.string,
+      }
+
+      Child.defaultProps = {
+        name: 'shiyanlou'
+      }
+
+      class Parent extends React.Component {
+        constructor(props) {
+          super(props)
+        }
+
+        render() {
+          const name = 'World';
+          return (
+            <div>
+              <Child name={name} />  
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById('root'));
+      
+    </script>
+  </body>
+</html>

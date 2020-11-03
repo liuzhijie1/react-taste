@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<title>shiyanlou</title>
+<script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+<script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+<script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+<script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+</head>
+
+<body>
+<div id="root"></div>
+<script type="text/babel">
+const node = document.getElementById("root");
+const root =    // ⇽--- React.createElement返回单个React元素，而这正是存储在root中供以后使用的东西
+      React.createElement('div', {},
+        React.createElement('h1', {}, "Hello, world!", // ⇽--- 空格更好地展示了嵌套，但切勿搞混是如何在各自的children…参数中嵌套几个React.createElement调用的
+           React.createElement('a', {href: 'https://www.lanqiao.cn'},  // ⇽--- 创建一个链接
+            React.createElement('h1', {}, "React In Action"),
+            React.createElement('em', {}, "...and now it really is!")  // ⇽--- 内部文本也可以传给children…
+           )
+         )
+       );
+ReactDOM.render(root, node);
+</script>
+</body>
+</html>
