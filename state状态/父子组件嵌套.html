@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // render() 会在以下三种情况发生的时候被执行：
+      // 1、页面首次加载，这很容易理解，页面第一次加载，当然要执行渲染函数了
+      // 2、通过 setState 改变组件的 state，注意，是通过 setState 改变，而不是通过 this.state 直接操作，
+      // 这也解释了为什么我们操作组件的 state 要通过 setState 而不是 this.state，使用后者可能会导致 state 的值被覆盖掉，渲染不到我们想要的结果。
+      // 3、组件接收到新的 props
+
+      
+      // 让我们看看点击按钮后发生了什么，在父组件中，按钮点击事件绑定了方法 changeState()，
+      // 方法体的内部是使用 setState 对 state 进行修改，父组件使用 state 的地方是在给子组件传值的时候，
+      // 将 state.name 作为 props.name 传给子组件，到此，这是父组件的变化，
+      // 由于父组件的 state 被 setState 修改，所以父组件要重新渲染，
+      // 所以父组件又一次调用了 render()方法；
+      // 对于子组件来说，由于父组件的操作，导致传入的 props 发生了改变，所以子组件也要重新渲染，
+      // 也就是重新调用 render()。
+      // 其实，React 在渲染的时候只会挑选发生变化的地方去渲染，
+      // 从父组件的角度来看，父组件从新渲染时，子组件也要被重新渲染，
+      // 因为传给子组件的值发生了变化，从子组件的角度来看，再次渲染的原因是 props 发生了变化。
+      class Child extends React.Component {
+        constructor(props) {
+          super(props);
+        }
+        render() {
+          console.log("Child Component render()");
+          return <h1>Hello {this.props.name}</h1>;
+        }
+      }
+
+      class Parent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            name: "World",
+          };
+          this.changeState = this.changeState.bind(this);
+        }
+
+        changeState() {
+          this.setState({
+            name: "new state",
+          });
+        }
+
+        render() {
+          console.log("Parent Component render()");
+          return (
+            <div>
+              <Child name={this.state.name} />
+              <button onClick={this.changeState}>change state</button>
+            </div>
+          );
+        }
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById("root"));
+    </script>
+  </body>
+</html>

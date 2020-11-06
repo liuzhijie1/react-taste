@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+            // new 一个 构造函数 内部进行的细节
+      //       function Foo(name,age,sex){
+      // 　　　　　　　　this.name = name;
+      // 　　　　　　　　this.age = age;
+      // 　　　　　　　　this.sex = sex;
+      // 　　　　　　}
+      // 　　　　　　Foo.prototype.belief = function(){
+      // 　　　　　　　　console.log('量变是质变的必要准备，质变是量变积累到一定程度的必然结果！');
+      // 　　　　　　}
+      // 　　　　　　let f = new Foo ('zh',18,'男');
+      //       let f = {};
+      //       f.__proto__ = Foo.prototype;
+      //       Foo.call(f,'lui',15,'nan');
+      //       此时的 f = {
+      //         name: 'lui',
+      //         age:15,
+      //         sex: 'nan'
+      //       }
+      //       f.belief();
+
+        class Welcome extends React.Component {
+          constructor(props) {
+            super(props);
+            this.state = {
+              value: 1
+            }
+          }
+
+          componentWillMount() {
+            this.setState({
+              value: this.state.value + 1
+            })
+            console.log(this.state.value);
+          }
+
+          render() {
+            return <h1>{this.state.value}</h1>
+          }
+        }
+
+        ReactDOM.render(<Welcome />, document.getElementById('root'))
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    // render() 会在以下三种情况发生的时候被执行：
+    // 1、页面首次加载，这很容易理解，页面第一次加载，当然要执行渲染函数了
+    // 2、通过 setState 改变组件的 state，注意，是通过 setState 改变，而不是通过 this.state 直接操作，
+    // 这也解释了为什么我们操作组件的 state 要通过 setState 而不是 this.state，使用后者可能会导致 state 的值被覆盖掉，渲染不到我们想要的结果。
+    // 3、组件接收到新的 props
+      class Welcome  extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            name: 'World'
+          }
+        }
+
+        render() {
+          this.setState({
+            name: 'new World',
+          });
+          return <h1>Hello, {this.state.name}</h1>
+        }
+      }
+
+      ReactDOM.render(<Welcome />, document.getElementById('root'))
+    </script>
+  </body>
+</html>
