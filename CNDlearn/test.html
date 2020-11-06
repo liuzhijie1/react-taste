@@ -12,19 +12,19 @@
     obj = {
       test: function() {
         for(var i=0;i<1;i++){
-          console.log(this);
+          console.log(this);  //Object
         }
         [1].forEach(()=>{
-          console.log(this);
+          console.log(this); //Object
         });
         [1].forEach(function(){
-          console.log(this);
+          console.log(this);  //WINdow
         })
         setTimeout(()=>{
-          console.log(this);
+          console.log(this); //OBject
         })
         setTimeout(function(){
-          console.log(this);
+          console.log(this); //Window
         })
       }
     }
