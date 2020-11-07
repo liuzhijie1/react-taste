@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      function Item(props) {
+        return (
+          <li>
+            {props.item}
+            <input type="text" />
+          </li>
+        );
+      }
+      class DataList extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            List: props.List,
+          };
+          this.changeState = this.changeState.bind(this);
+        }
+        changeState() {
+          this.setState((prevState) => ({
+            List: prevState.List.reverse(),
+          }));
+        }
+        render() {
+          return (
+            <div>
+              <button onClick={this.changeState}>reverse</button>
+              <ul>
+                {this.state.List.map((item, index) => (
+                  <Item key={index} item={item} />
+                ))}
+              </ul>
+            </div>
+          );
+        }
+      }
+      const list = ['a', 'b', 'c'];
+      ReactDOM.render(
+        <DataList List={list} />,
+        document.getElementById('root')
+      );
+    </script>
+  </body>
+</html>

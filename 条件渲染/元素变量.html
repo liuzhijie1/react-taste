@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      function LogIn() {
+        return <h1>Welcome !</h1>
+      }
+
+      function LogOut() {
+        return <h1>Please log in !</h1>
+      }
+
+      class Welcome extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            isLogging: false
+          };
+          this.changeState = this.changeState.bind(this);
+        }
+
+        changeState(prevState) {
+          this.setState((prevState) => ({isLogging: !prevState.isLogging}));
+        }
+
+        render() {
+          const isLogging = this.state.isLogging;
+          let greeting = null;
+          if (isLogging) {
+            greeting = <LogIn />
+          } else {
+            greeting = <LogOut />
+          }
+
+          return (
+            <div>
+              {greeting}
+              <button onClick={this.changeState}>change state</button>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Welcome />, document.getElementById('root'));
+
+
+    </script>
+  </body>
+</html>

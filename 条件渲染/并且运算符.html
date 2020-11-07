@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+      // 在 JavaScript 中，true && expression 会返回 expression，
+      // false && expression 会返回 false，这也就为我们提供了使用 && 进行渲染的条件。
+
+      class Welcome extends React.Component {
+        constructor() {
+          super();
+          this.state = {
+            content: ''
+          };
+          this.readContent = this.readContent.bind(this);
+        }
+
+        readContent(event) {
+          this.setState({
+            content: event.target.value
+          })
+        }
+
+        render() {
+          return (
+            <div>
+              <textarea content={this.state.content} onChange={this.readContent}></textarea>
+              {this.state.content && (<h2>you have input : {this.state.content}</h2>)}
+            </div>
+          )
+        }
+      }
+
+
+      ReactDOM.render(<Welcome />, document.getElementById('root'));
+
+    </script>
+  </body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+    // 从空间上来说，方式一更具优势，
+    // 因为实例共享一个方法体定义，而方式二则会对每一个实例化的组件都定义一个方法体；
+    // 从调用速度来说，在调用过程中，方式二的调用速度大于方式一，因为在原型链上的查找会比较慢。
+
+    // 对于 method3，我们每次渲染都要重新创建一个绑定 this 的元素，操作十分冗余，浪费性能。
+
+      class EventHandling extends React.Component {
+        constructor(props) {
+          super();
+          this.method1 = this.method1.bind(this);  // 方式一，在构造函数内部绑定
+        }
+
+        method1() {
+          console.log('method1 ' + this);
+        }
+
+        method2 = () => {
+          console.log('method2 ' + this);
+        }
+
+        method3() {
+          console.log('method3 ' + this);
+        }
+
+        method4() {
+          console.log('method4 ' + this);
+        }
+
+        render() {
+          return (
+            <div>
+              <button onClick={this.method1}>method1</button>
+              <button onClick={this.method2}>method2</button>
+              <button onClick={this.method3.bind(this)}>method3</button>
+              <button onClick={() => { this.method4() }}>method4</button>
+            </div>
+          )
+        }
+      }
+
+
+      ReactDOM.render(<EventHandling />, document.getElementById('root'))
+
+    </script>
+  </body>
+</html>
