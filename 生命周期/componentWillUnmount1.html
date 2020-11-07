@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class Welcome extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            date: new Date()
+          }
+          this.destroyComponent = this.destroyComponent.bind(this);
+          this.tick = this.tick.bind(this);
+        }
+
+        destroyComponent() {
+          ReactDOM.unmountComponentAtNode(document.getElementById('root'))
+        }
+
+        // 这里其实隐藏了一些坑点 这里注释的2中方法都是可以的
+        componentDidMount() {
+          // this.clock = setInterval(() => this.tick(),1000);
+          this.clock = setInterval( this.tick,1000);
+        }
+
+        // 这里的this 是由这个组件的生命周期自己调用的，所以他的指向就是这个相应的组件
+        componentWillUnmount() {
+          console.log('destroy');
+          clearInterval(this.clock);
+        }
+
+        tick() {
+          this.setState({
+            date: new Date()
+          })
+        }
+
+        render() {
+          return (
+            <div>
+              <h1>Date: {this.state.date.toLocaleTimeString()}</h1>
+              <button onClick={this.destroyComponent}>destroy Component</button>
+            </div>
+          )
+        }
+      }
+
+
+      ReactDOM.render(<Welcome />, document.getElementById('root'))
+      
+    </script>
+  </body>
+</html>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class Parent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            val: 'World'
+          };
+          this.changeState = this.changeState.bind(this);
+        }
+
+        changeState() {
+          console.log('change props');
+          this.setState({
+            val: 'setState'
+          });
+        }
+
+        render() {
+          console.log('Parent render()');
+          return (
+            <div>
+              <h1>in parent state.val = {this.state.val}</h1>
+              <Child val={this.state.val} fn={this.changeState} />
+            </div>
+          )
+        }
+
+        shouldComponentUpdate(nextProps, nextState) {
+          return nextState.val == 'setState';
+        }
+      }
+
+      class Child extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            val: 'shiyanlou'
+          };
+        }
+
+        render() {
+          console.log('Child render()');
+          return (
+            <div>
+              <h1>props.val = {this.props.val}</h1>
+              <h1>state.val = {this.state.val}</h1>
+              <button onClick={this.props.fn}>change props from parent</button>
+            </div>
+          )
+        }
+
+        shouldComponentUpdate(nextProps, nextState) {
+          console.log('child should');
+          return (
+            nextProps.val == 'setState' || nextState !== 'props has been changed'
+          )
+        }
+
+        componentWillReceiveProps() {
+          console.log('props changed');
+          this.setState({
+            val: 'props has been changed'
+          })
+        }
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById('root'))
+
+    </script>
+  </body>
+</html>

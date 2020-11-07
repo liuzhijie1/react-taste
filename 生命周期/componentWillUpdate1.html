@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+
+      class Welcome extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            val: 'World'
+          };
+          this.changeState = this.changeState.bind(this);
+        }
+
+        changeState() {
+          console.log('change state');
+          this.setState({
+            val: 'setState'
+          });
+        }
+
+        componentWillUpdate() {
+          console.log('componentWillUpdate()');
+        }
+
+        render() {
+          console.log('render');
+          return (
+            <div>
+              <h1>state.val = {this.state.val}</h1>
+              <button onClick={this.changeState}>change state</button>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Welcome />, document.getElementById('root'))
+
+    </script>
+  </body>
+</html>

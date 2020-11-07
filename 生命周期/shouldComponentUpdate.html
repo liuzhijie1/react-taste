@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title></title>
+    <script src="https://unpkg.com/react@16/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@16/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/babel-standalone@6.15.0/babel.min.js"></script>
+    <script src="https://unpkg.com/prop-types@15.6/prop-types.js"></script>
+  </head>
+  <body>
+    <div id="root"></div>
+    <script type="text/babel">
+    // 一个子组件在运行时，接收了来自父组件的 props，虽然在子组件中不能改变 props，
+    // 可并不代表这个 props 就是不变的，当父组件改变传给子组件的 props 时，
+    // 子组件生命周期的 componentWillReceiveProps 方法就会被调用，可以在这个方法里更新子组件的 state。
+      class Parent extends React.Component {
+        constructor(props) {
+          super(props);
+          this.state = {
+            value: '娃哈哈'
+          }
+          this.handleClick = this.handleClick.bind(this);
+        }
+
+        handleClick() {
+          this.setState({
+            value: '爱斯达克佳节快乐'
+          })
+        }
+
+        render() {
+          const testt = '那种';
+          console.log('Parent render()');
+          return (
+            <div>
+              <h1>parent state {this.state.value}</h1>
+              <Child value={testt} onClick={this.handleClick} />
+            </div>
+          )
+        }
+      }
+
+      class Child extends React.Component {
+        constructor(props) {
+          super(props)
+        }
+
+        render() {
+          console.log('Child render()');
+          return (
+            <div>
+              <h1>child prop {this.props.value}</h1>
+              <button onClick={this.props.onClick}>This is a button!</button>
+            </div>
+          )
+        }
+      }
+
+      ReactDOM.render(<Parent />, document.getElementById('root'))
+    </script>
+  </body>
+</html>
