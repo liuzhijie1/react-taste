@@ -11,6 +11,9 @@ import Demo4 from './Demo4'
 import Demo5 from './Demo5'
 import Demo6 from './Demo6'
 import Demo7 from './Demo7'
+import Demo12 from './Demo12'
+import Demo13 from './Demo13'
+import Demo14 from './Demo14'
 
 const App = () => {
   return (
@@ -37,6 +40,15 @@ const App = () => {
         <li>
           <Link to="/demo7">demo7</Link>
         </li>
+        <li>
+          <Link to="/demo12">demo12</Link>
+        </li>
+        <li>
+          <Link to="/demo13">demo13</Link>
+        </li>
+        <li>
+          <Link to="/demo14">demo14</Link>
+        </li>
       </ul>
       <Switch>
         <Route exact path="/">
@@ -59,6 +71,15 @@ const App = () => {
         </Route>
         <Route path="/demo7">
           <Demo7></Demo7>
+        </Route>
+        <Route path="/demo12">
+          <Demo12></Demo12>
+        </Route>
+        <Route path="/demo13">
+          <Demo13></Demo13>
+        </Route>
+        <Route path="/demo14">
+          <Demo14></Demo14>
         </Route>
       </Switch>
     </Router>
